@@ -16,15 +16,18 @@ public class ProverbClientMain {
             ){
                 String serverResponse;
                 while ((serverResponse = serverInput.readLine())!=null){
-                    JOptionPane.showMessageDialog(null, serverResponse, "CLIENT", JOptionPane.INFORMATION_MESSAGE);
-                    break;
+                    if(ProverbProtocol.isEndGame(serverResponse)){
+                        JOptionPane.showMessageDialog(null, serverResponse, "CLIENT", JOptionPane.INFORMATION_MESSAGE);
+                        break;
+                    }
+                    String userInput = JOptionPane.showInputDialog(null, serverResponse, "CLIENT", JOptionPane.INFORMATION_MESSAGE);
+                    serverOutput.println(userInput);
                 }
-                String userInput = JOptionPane.showInputDialog(null, serverResponse, "CLIENT", JOptionPane.INFORMATION_MESSAGE);
-                serverOutput.println(userInput);
             }
+
+        }catch(IOException ex){
+            System.err.printf("IO Error: %s\n", ex.getMessage());
         }
-    }catch(IOException ex){
-        System.err.printf("IO Error: %s\n", ex.getMessage());
+        System.exit(0);
     }
-    System.exit(0);
 }

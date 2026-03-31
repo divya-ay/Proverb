@@ -10,13 +10,13 @@ public class ProverbProtocol {
     public static final String EXIT_MESSAGE= "Bye!";
 
     public enum Status{
-        Initial_STATE,
+        INITIAL_STATE,
         SENT_GREETING,
         SENT_CLUE,
         MAYBE_KEEP_PLAYING,
     }
 
-    private Status state= Status.Initial_STATE;
+    private Status state= Status.INITIAL_STATE;
 
     private  List<String> CLUE_LIST = List.of(
             "At night all the cats",
@@ -42,7 +42,7 @@ public class ProverbProtocol {
         if(theInput == null && state != Status.INITIAL_STATE) return processExit();
         switch (state){
             default:
-            case Initial_STATE:
+            case INITIAL_STATE:
                 state = Status.SENT_GREETING;
                 return String.format("Are you ready player %d?", playerNumber);
 
@@ -59,7 +59,7 @@ public class ProverbProtocol {
     }
 
     private String processExit(){
-        state = Status.Initial_STATE;
+        state = Status.INITIAL_STATE;
         return EXIT_MESSAGE;
     }
 

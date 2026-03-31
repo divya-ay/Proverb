@@ -15,12 +15,11 @@ public class socketServerMain {
         try{
             InetAddress address = InetAddress.getByName(ADDRESS);
             try (ServerSocket serverSocket = new ServerSocket(PORT, 50, address)){
-                System.out.printf("Awaiting connections on %s : %d\n", ADDRESS, PORT);
+                System.out.printf("Awaiting connections on %s : %d\n", address.getHostAddress(), PORT);
                 try (Socket clientSocket= serverSocket.accept()){
                     System.out.printf("[%s: %d] connected!\n",
-                            clientSocket.getInetAddress().getHostName());
-                            clientSocket.getPort()
-                    );
+                            clientSocket.getInetAddress().getHostName(),
+                            clientSocket.getPort());
                 try(
                         BufferedReader clientReader
                                 = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
